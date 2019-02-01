@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "buildify": {
+      "commandName": "Project",
+      "commandLineArgs": "test"
+    }
+  }
+}

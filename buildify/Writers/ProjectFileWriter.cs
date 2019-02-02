@@ -7,11 +7,12 @@ using System.IO;
 
 namespace buildify.Writers
 {
+
+    /// <summary>
+    /// Writes a project file to a path.
+    /// </summary>
     public class ProjectFileWriter
     {
-
-        public ProjectFileWriter() { }
-
         public async Task Write(ProjectFile file)
         {
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(file.Path, file.Name)))

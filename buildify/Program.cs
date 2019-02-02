@@ -13,43 +13,55 @@ namespace buildify
         {
             Console.WriteLine("Creating project...");
 
+
             // Set a variable to the Documents path.
             string projectName = args[0];
             string projectPath = $"{Environment.CurrentDirectory}";
             string innerProjectPath = $"{projectPath}\\{projectName}";
 
-            await CreateProjectFolder(projectName, projectPath);
+            var fileWriter = new ProjectFileWriter();
+            var folderWriter = new ProjectFolderWriter();
+            var fileFactory = new ProjectFileFactory();
+            var folderFactory = new ProjectFolderFactory(projectName);
 
-            WriteGulpFileJs(innerProjectPath);
+            //await CreateProjectFolder(projectName, projectPath, folderWriter);
 
-            WriteIndexHtml(innerProjectPath);
+            //WriteGulpFileJs(innerProjectPath, fileWriter);
 
-            WriteStyleScss(innerProjectPath);
+            //WriteIndexHtml(innerProjectPath, fileWriter);
 
-            CreateCssDirectory(innerProjectPath);
+            //WriteStyleScss(innerProjectPath, fileWriter, folderWriter);
 
-            WritePackageJson(innerProjectPath);
+            //CreateCssDirectory(innerProjectPath, folderWriter);
 
+            //WritePackageJson(innerProjectPath, fileWriter);
+
+            var composer = new ProjectComposer(
+                fileFactory,
+                folderFactory,
+                fileWriter,
+                folderWriter,
+                projectPath,
+                projectName);
+
+            await composer.Compose();
             Console.WriteLine($"Project created at: {innerProjectPath}");
         }
 
-        public static async Task CreateProjectFolder(string folderName, string docPath)
+        public static async Task CreateProjectFolder(string folderName, string docPath, ProjectFolderWriter folderWriter)
         {
-            var writer = new ProjectFolderWriter();
             var folder = new ProjectFolder(folderName, docPath);
-            await writer.Write(folder);
+            await folderWriter.Write(folder);
         }
 
-        public static async Task CreateCssDirectory(string docPath)
+        public static async Task CreateCssDirectory(string docPath, ProjectFolderWriter folderWriter)
         {
             var cssFolder = new ProjectFolder("css", docPath);
-            var writer = new ProjectFolderWriter();
-            await writer.Write(cssFolder);
+            await folderWriter.Write(cssFolder);
         }
 
-        public static async Task WriteGulpFileJs(string docPath)
+        public static async Task WriteGulpFileJs(string docPath, ProjectFileWriter fileWriter)
         {
-            var writer = new ProjectFileWriter();
             var sb = new StringBuilder();
 
             sb.AppendLine("var gulp = require('gulp');");
@@ -66,14 +78,12 @@ namespace buildify
             sb.AppendLine("    gulp.watch('sass/**/*.scss', gulp.series('styles'));");
             sb.AppendLine("});");
 
-
             var gulpFileJs = new ProjectFile("Gulpfile", "js", docPath, sb.ToString());
-            await writer.Write(gulpFileJs);
+            await fileWriter.Write(gulpFileJs);
         }
 
-        public static async Task WriteIndexHtml(string docPath)
+        public static async Task WriteIndexHtml(string docPath, ProjectFileWriter fileWriter)
         {
-            var writer = new ProjectFileWriter();
             var sb = new StringBuilder();
 
             sb.AppendLine("<!DOCTYPE html>");
@@ -86,34 +96,28 @@ namespace buildify
             sb.AppendLine("	<link rel=\"stylesheet\" type=\"text/css\" href=\"./css/style.css\"/>");
             sb.AppendLine("</head>");
             sb.AppendLine("<body>");
-            sb.AppendLine("  TEST");
             sb.AppendLine("</body>");
             sb.AppendLine("</html>");
 
             var indexHtmlFile = new ProjectFile("index", "html", docPath, sb.ToString());
-            await writer.Write(indexHtmlFile);
+            await fileWriter.Write(indexHtmlFile);
         }
 
-        public static async Task WriteStyleScss(string docPath)
+        public static async Task WriteStyleScss(string docPath, ProjectFileWriter fileWriter, ProjectFolderWriter folderWriter)
         {
-            // file and folder writers
-            var fileWriter = new ProjectFileWriter();
-            var folderWriter = new ProjectFolderWriter();
-
             // create the folder
             var sassFolder = new ProjectFolder("sass", docPath);
             await folderWriter.Write(sassFolder);
 
-            // create the SCSS file
-            string scssContent = "body { background-color: lightgreen; }";
-            var scssFile = new ProjectFile("style", "scss", $"{docPath}\\{sassFolder.Name}", scssContent);
+            // create the SCSS file with placeholder style
+            string scssContent = "body { display: grid; }";
 
+            var scssFile = new ProjectFile("style", "scss", $"{docPath}\\{sassFolder.Name}", scssContent);
             await fileWriter.Write(scssFile);
         }
 
-        public static async Task WritePackageJson(string docPath)
+        public static async Task WritePackageJson(string docPath, ProjectFileWriter fileWriter)
         {
-            var fileWriter = new ProjectFileWriter();
             var sb = new StringBuilder();
 
             string name = "ui-boilerplate";
@@ -135,7 +139,6 @@ namespace buildify
             sb.AppendLine("}");
 
             var packageJsonFile = new ProjectFile("package", "json", docPath, sb.ToString());
-
             await fileWriter.Write(packageJsonFile);
         }
     }

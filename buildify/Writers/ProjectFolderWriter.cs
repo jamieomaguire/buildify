@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace buildify.Writers
 {
+    /// <summary>
+    /// Writes a project folder to a given path.
+    /// </summary>
     public class ProjectFolderWriter
     {
-        public ProjectFolderWriter() { }
-
         public async Task Write(ProjectFolder folder)
         {
             Directory.CreateDirectory(folder.Path);

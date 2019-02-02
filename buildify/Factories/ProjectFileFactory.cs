@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using buildify.Models;
 
-namespace buildify
+namespace buildify.Factories
 {
     /// <summary>
     /// Responsible for creating new instances of <see cref="ProjectFile"/>.

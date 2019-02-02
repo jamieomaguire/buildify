@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace buildify
+namespace buildify.Factories
 {
     /// <summary>
     /// Responsible for creating new instances of <see cref="ProjectFolder"/>.

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using buildify.Models;
-using System.Text;
+﻿using buildify.Models;
 using System.Threading.Tasks;
 using System.IO;
 
 namespace buildify.Writers
 {
-
     /// <summary>
     /// Writes a project file to a path.
     /// </summary>

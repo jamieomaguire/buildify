@@ -1,10 +1,8 @@
 ﻿using buildify.Factories;
-using buildify.Models;
 using buildify.Writers;
 using System;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace buildify
@@ -15,7 +13,6 @@ namespace buildify
         {
             Console.WriteLine("Creating project...");
 
-            // Set a variable to the Documents path.
             string projectName = args.Any() ? args[0] : "buildify-ui-template";
             string projectPath = $"{Environment.CurrentDirectory}";
             string innerProjectPath = $"{projectPath}{Path.DirectorySeparatorChar}{projectName}";

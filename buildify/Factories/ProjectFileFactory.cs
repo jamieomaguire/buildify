@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using System.Threading.Tasks;
 using buildify.Models;
 
@@ -22,7 +20,7 @@ namespace buildify.Factories
             sb.AppendLine("  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
             sb.AppendLine("  <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">");
             sb.AppendLine("  <title>Document</title>");
-            sb.AppendLine("	<link rel=\"stylesheet\" type=\"text/css\" href=\"./css/style.css\"/>");
+            sb.AppendLine("	<link rel=\"stylesheet\" type=\"text/css\" href=\"./prod/main.css\"/>");
             sb.AppendLine("</head>");
             sb.AppendLine("<body>");
             sb.AppendLine("</body>");

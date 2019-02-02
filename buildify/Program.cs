@@ -3,6 +3,7 @@ using buildify.Models;
 using buildify.Writers;
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,11 +13,10 @@ namespace buildify
     {
         static async Task Main(string[] args)
         {
-
             Console.WriteLine("Creating project...");
 
             // Set a variable to the Documents path.
-            string projectName = args[0];
+            string projectName = args.Any() ? args[0] : "ui-template";
             string projectPath = $"{Environment.CurrentDirectory}";
             string innerProjectPath = $"{projectPath}\\{projectName}";
 
@@ -36,6 +36,5 @@ namespace buildify
             await composer.Compose();
             Console.WriteLine($"Project created at: {innerProjectPath}");
         }
-
     }
 }

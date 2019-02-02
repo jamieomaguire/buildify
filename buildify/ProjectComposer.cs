@@ -1,5 +1,6 @@
 ﻿using buildify.Factories;
 using buildify.Writers;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace buildify
@@ -15,13 +16,7 @@ namespace buildify
         private readonly ProjectFolderWriter folderWriter;
         private readonly string projectPath;
         private readonly string projectName;
-        private string InnerProjectPath
-        {
-            get
-            {
-                return $"{projectPath}\\{projectName}";
-            }
-        }
+        private string InnerProjectPath => $"{projectPath}{Path.DirectorySeparatorChar}{projectName}";
 
         public ProjectComposer(
             ProjectFileFactory fileFactory,
@@ -89,7 +84,7 @@ namespace buildify
         /// </summary>
         private async Task CreateScssOutputDirectory()
         {
-            await folderWriter.Write(folderFactory.ScssOutputFolder($"{InnerProjectPath}\\dev"));
+            await folderWriter.Write(folderFactory.ScssOutputFolder($"{InnerProjectPath}{Path.DirectorySeparatorChar}dev"));
         }
         #endregion
 
@@ -115,7 +110,7 @@ namespace buildify
         /// </summary>
         private async Task CreateMainScssFile()
         {
-            await fileWriter.Write(await fileFactory.MainScss($"{InnerProjectPath}\\dev"));
+            await fileWriter.Write(await fileFactory.MainScss($"{InnerProjectPath}{Path.DirectorySeparatorChar}dev"));
         }
 
         /// <summary>

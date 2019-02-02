@@ -16,7 +16,7 @@ namespace buildify
             Console.WriteLine("Creating project...");
 
             // Set a variable to the Documents path.
-            string projectName = args.Any() ? args[0] : "ui-template";
+            string projectName = args.Any() ? args[0] : "buildify-ui-template";
             string projectPath = $"{Environment.CurrentDirectory}";
             string innerProjectPath = $"{projectPath}{Path.DirectorySeparatorChar}{projectName}";
 

@@ -43,8 +43,8 @@ namespace buildify.Factories
             var sb = new StringBuilder();
 
             string name = "buildify-ui-boilerplate";
-            string description = "A boilerplate project for a gulp and PostCSS powered static HTML page";
-            string author = "Jamie Maguire";
+            string description = "A project template for UI prototypes using Gulp and PostCSS";
+            string author = "Buildify";
             string gulpVersion = "4.0.0";
             string gulpSassVersion = "4.0.2";
             string autoprefixerVersion = "9.4.7";

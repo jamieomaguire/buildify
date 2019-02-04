@@ -26,3 +26,8 @@ npm install
 gulp
 ```
 7. Begin coding! As you make changes to main.scss Gulp will watch for changes and run the appropriate tasks.
+
+***
+
+### System Requirements:
+- .Net Core SDK v2.0.0 +

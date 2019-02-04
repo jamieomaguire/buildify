@@ -14,7 +14,7 @@ namespace buildify
             Console.WriteLine("Creating project...");
 
             string projectName = args.Any() ? args[0] : "buildify-ui-template";
-            string projectPath = $"{Environment.CurrentDirectory}";
+            string projectPath = Environment.CurrentDirectory;
             string innerProjectPath = $"{projectPath}{Path.DirectorySeparatorChar}{projectName}";
 
             var fileWriter = new ProjectFileWriter();

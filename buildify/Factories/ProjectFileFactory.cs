@@ -81,9 +81,9 @@ namespace buildify.Factories
             sb.AppendLine("");
             sb.AppendLine("// Compiles SCSS to CSS");
             sb.AppendLine("gulp.task('scss', function() {");
-            sb.AppendLine("    gulp.src('dev/**/*.scss')");
-            sb.AppendLine("        .pipe(sass().on('error', sass.logError))");
-            sb.AppendLine("        .pipe(gulp.dest('./dev/scss-output/'))");
+            sb.AppendLine("    return gulp.src('dev/**/*.scss')");
+            sb.AppendLine("            .pipe(sass().on('error', sass.logError))");
+            sb.AppendLine("            .pipe(gulp.dest('./dev/scss-output/'))");
             sb.AppendLine("});");
             sb.AppendLine();
             sb.AppendLine("// Array to store PostCSS plugins");

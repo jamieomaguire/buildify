@@ -31,6 +31,7 @@ namespace buildify
                 projectName);
 
             await composer.Compose();
+
             Console.WriteLine($"Project created at: {innerProjectPath}");
         }
     }
